@@ -1,0 +1,7 @@
+import wollok.game.*
+
+import pvz.juego
+
+program juego_wollok {
+	juego.iniciar()
+}
