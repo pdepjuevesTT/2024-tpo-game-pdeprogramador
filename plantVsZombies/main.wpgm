@@ -1,0 +1,7 @@
+import pvz.juego
+program juego_wollok {
+	juego.configuracion()
+    juego.visuales()
+    juego.eventos()
+    game.start()
+}
