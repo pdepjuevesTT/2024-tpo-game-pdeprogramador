@@ -1,16 +1,15 @@
-import plantas.lanzaGuisantes.*
-import plantas.girasol.*
-import pvz.juego
+import plantas.girasol.Girasol
+//import plantas.lanzaguisantes.Lanzaguisantes No se porque no me deja immportar el lanzaguisantes, ayuda!!
 object cursor{
     var property position = game.at(2, 3)
-    method xPlantableRange () = self.position().x()>=1 && self.position().x()<=20
-    method yPlantableRange () = self.position().y() <9
+    method xPlantableRange () = self.position().x()>=1 && self.position().x()<=9
+    method yPlantableRange () = self.position().y() <5
     method plantableRange () = self.xPlantableRange() && self.yPlantableRange()
     method image() = "cursor.png"
+    method serImpactado(algo){}
     method plantar(){
         if(self.plantableRange())
-        juego.crear(new Girasol(position = self.position()))
-    }
+            game.addVisual(new Girasol(position = position))}
     method recolectar(algo){
         if(algo.recolectable()){
             game.removeVisual(algo)
@@ -28,12 +27,10 @@ object contadorSoles{
     method text() = ""+soles
 }
 
-class Sol{
-    const property recolectable = true
-
-    const property position
-    method image() = "sol_f0.png"
-    method valor() = 50
-    method actualizar() {}
+object gestorId{
+    var id = 0
+    method nuevoId(){
+        id+=1
+        return id
+    }
 }
-
