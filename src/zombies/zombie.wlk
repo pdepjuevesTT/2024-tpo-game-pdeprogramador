@@ -13,7 +13,7 @@ class Zombie {
       self.delete()
   }
 
-  method initialize (){game.onTick(1500, evento, {self.avanzar()})}
+  method initialize (){game.onTick(2000, evento, {self.avanzar()})}
 
   method avanzar () {
     if(position.x()!=0)    
@@ -29,4 +29,3 @@ class Zombie {
   }
 
 }
-

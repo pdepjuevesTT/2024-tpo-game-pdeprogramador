@@ -1,7 +1,7 @@
 import plantas.planta.Planta
 class Girasol inherits Planta(velocidad = 10000, costo = 50){
   override method image() = "girasol.png"
-  override method hacerAlgo() {game.addVisual(new Sol())}
+  override method hacerAlgo() {game.addVisual(new Sol(position = position))}
   override method delete() {
     game.removeTickEvent(evento)
     super()}

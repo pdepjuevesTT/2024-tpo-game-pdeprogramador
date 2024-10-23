@@ -1,4 +1,5 @@
 import zombies.zombie.*
+import zombies.bucketHead.BucketHead
 import plantas.girasol.Sol
 import wollok.game.*
 import principales.*
@@ -39,7 +40,10 @@ object hordas{
   }
   method generarZombies(cantidad){
     if(cantidad>0)
-      game.addVisual(new Zombie())
+      if((1..3).anyOne() == 1)
+        game.addVisual(new BucketHead())
+      else
+        game.addVisual(new Zombie())
       game.schedule(1000, {self.generarZombies(cantidad-1)})
   }
 }
