@@ -7,9 +7,9 @@ class PapaPum inherits Planta(velocidad = 10000, costo = 150) {
 
   method cargarse(){
     image = "papaCargada.png"
-    game.onCollideDo(self, {x=>x.serImpactado(self)})} //En un futuro será que explote cuando el zombie trate de comerlo
+    game.onCollideDo(self, {x=>x.perderVida(danio) self.explotar()})}
   override method image() = image
-  override method delete(){
+  method explotar(){
     image = "explosion.png"
     game.schedule(1000, {game.removeVisual(self)})
   }

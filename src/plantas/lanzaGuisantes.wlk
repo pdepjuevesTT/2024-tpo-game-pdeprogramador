@@ -1,12 +1,9 @@
-import plantas.planta.Planta
+import plantas.planta.PlantaConEvento
 import principales.gestorId
 
-class Lanzaguisantes inherits Planta(costo = 100, velocidad = 3000){
+class Lanzaguisantes inherits PlantaConEvento(costo = 100, velocidad = 3000){
   override method image() = "lanzaguisantes.png"
   override method hacerAlgo() {game.addVisual(new Guisante(position=position))}
-    override method delete() {
-    game.removeTickEvent(evento)
-    super()}
 }
 
 
@@ -26,13 +23,16 @@ class Guisante {
   }
 
   method initialize(){
-    game.onCollideDo(self, {x=>x.serImpactado(self)})
+    game.onCollideDo(self, {x=>self.impactar(x)})
     game.onTick(velocidad, evento, {self.avanzar()})}
+
+  method impactar(algo) {algo.serImpactado(self)}
   method avanzar() {
     if(position.x()<game.width())
       position = position.right(1)
     else
       self.delete()
     }
+  method esPlanta() = false
 }
 

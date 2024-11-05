@@ -3,6 +3,7 @@ import zombies.bucketHead.BucketHead
 import plantas.girasol.Sol
 import wollok.game.*
 import principales.*
+import seleccionadorPlantas.seleccionadorPlantas
 
 object juego {
   method configuracion() {
@@ -17,16 +18,15 @@ object juego {
     game.addVisual(contadorSoles)
     }
   method imputs(){
-    keyboard.space().onPressDo({cursor.plantarLanzaguisantes()})
-    keyboard.g().onPressDo({cursor.plantarGirasol()})
-    keyboard.p().onPressDo({cursor.plantarPapa()})
-    keyboard.r().onPressDo({cursor.cambiarRecoleccionPlantas()})
+    keyboard.space().onPressDo({cursor.plantar()})
+    keyboard.q().onPressDo({seleccionadorPlantas.anterior()})
+    keyboard.e().onPressDo({seleccionadorPlantas.siguiente()})
   }
   method eventos() {
     game.onTick(10000, "sol", {game.addVisual(new Sol())})
     game.onCollideDo(cursor, {p=>cursor.recolectar(p)})
     game.schedule(5000, {hordas.primera()})
-    //game.schedule(15000, {hordas.segunda()})
+    game.schedule(15000, {hordas.segunda()})
   }
 
 }
@@ -49,12 +49,13 @@ object hordas{
 }
 
 object reglas {
-  method plantable(position) = self.plantableRange(position) &&  not (self.hayPlantas(position))
+  method plantable(position) = self.plantableRange(position) &&  not (self.hayPlantaEn(position))
   
   method plantableRange (position) = self.xPlantableRange(position.x()) && self.yPlantableRange(position.y())
   method xPlantableRange (x) = x>=1 && x<=9
   method yPlantableRange (y) = y<5
 
-  method hayPlantas (position) = game.getObjectsIn(position).any({x=>x.className()=="Planta"})
+  method hayPlantaEn (position) = game.getObjectsIn(position).any({x=>x.esPlanta()})
+  method plantaEn (position) = game.getObjectsIn(position).find({x=>x.esPlanta()})
     
 }

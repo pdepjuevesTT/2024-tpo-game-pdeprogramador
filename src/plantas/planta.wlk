@@ -1,18 +1,33 @@
 import principales.*
 class Planta{
+  var vida = 3
   const property position
   const property velocidad
-  const evento = gestorId.nuevoId()
   const property costo
-  method recolectable() = cursor.recolectarPlantas()
+  method recolectable() = false
   method valor() = costo/2
   method serImpactado(algo){}
+  method congelar(){}
   method image()
-  method initialize(){
-    game.onTick(velocidad, evento, {self.hacerAlgo()})}
-  method hacerAlgo() {}
   method delete(){
     game.removeVisual(self)
     }
-  override method className() = "Planta"
+  method esPlanta() = true
+  method serAtacada(zombie){
+    vida-=zombie.danio()
+    if(vida<=0)
+      self.delete()
+  }
+}
+
+class PlantaConEvento inherits Planta{
+  const evento = gestorId.nuevoId()
+  method hacerAlgo()
+  method initialize(){
+    game.onTick(velocidad, evento, {self.hacerAlgo()})
+  }
+  override method delete(){
+    game.removeTickEvent(evento)
+    super()
+  }
 }

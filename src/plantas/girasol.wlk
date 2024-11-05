@@ -1,10 +1,7 @@
-import plantas.planta.Planta
-class Girasol inherits Planta(velocidad = 10000, costo = 50){
+import plantas.planta.PlantaConEvento
+class Girasol inherits PlantaConEvento(velocidad = 10000, costo = 50){
   override method image() = "girasol.png"
   override method hacerAlgo() {game.addVisual(new Sol(position = position))}
-  override method delete() {
-    game.removeTickEvent(evento)
-    super()}
 }
 class Sol{
     const property recolectable = true
@@ -15,4 +12,5 @@ class Sol{
     method serImpactado(alguien){}
     method initialize(){game.schedule(velocidad, {self.delete()})}
     method delete(){game.removeVisual(self)}
+    method esPlanta() = false
 }
