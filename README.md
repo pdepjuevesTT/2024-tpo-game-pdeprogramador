@@ -30,8 +30,7 @@ Con q y e se desplaza hacia la izquierda y derecha respectivamente la planta sel
 
 Periodicamente aparecen soles (o si hay un girasol plantado este mismo los generará), para recogerlos basta con pasar con el cursor sobre ellos
 
-Los soles se utilizan para comprar más plantas, 
-el costo de las mismas se observa en el cabezal
+Los soles se utilizan para comprar más plantas, el costo de las mismas se observa en el cabezal
 
 ### Zombies
 
