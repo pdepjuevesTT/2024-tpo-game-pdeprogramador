@@ -8,7 +8,7 @@ object cursor{
     method image() = "cursor.png"
     method serImpactado(algo){}
     method esPlanta() = false
-    method plantar() = seleccionadorPlantas.plantar(position)
+    method plantar() {seleccionadorPlantas.plantar(position)}
 
     method recolectar(algo){
         if(algo.recolectable()){
