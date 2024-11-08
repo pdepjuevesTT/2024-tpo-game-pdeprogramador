@@ -19,6 +19,7 @@ object seleccionadorPlantas{
 }
 
 class Plantador{
+    const costo
     var seleccionada = false
     const property siguiente
     const property anterior
@@ -28,57 +29,49 @@ class Plantador{
     method seleccionada () = if(seleccionada) 1 else 0
     method image() = "logo_" + self.kindName() + "_" + self.seleccionada() + ".png"
     method initialize(){game.addVisual(self)}
-
-}
-
-object girasol inherits Plantador(siguiente = lanzaguisantes, anterior = pala, seleccionada = true){
-    override method position() = game.at(1, game.height()-1)
     method plantar(lugar){
-        if(reglas.plantable(lugar) && contadorSoles.soles()>=50){
-            contadorSoles.soles(-50)
-            game.addVisual(new Girasol(position = lugar))
+        if(reglas.plantable(lugar) && contadorSoles.soles()>=costo){
+            contadorSoles.soles(-costo)
+            self.generarPlanta(lugar)
         }
+    }
+    method generarPlanta(lugar){}
+
+}
+
+object girasol inherits Plantador(siguiente = lanzaguisantes, anterior = pala, seleccionada = true, costo = 50){
+    override method position() = game.at(1, game.height()-1)
+    override method generarPlanta(lugar){
+        game.addVisual(new Girasol(position = lugar))
     }
 }
 
-object lanzaguisantes inherits Plantador(siguiente = lanzaguisantesCongelado, anterior = girasol){
-        method plantar(lugar){
-        if(reglas.plantable(lugar) && contadorSoles.soles()>=100){
-            contadorSoles.soles(-100)
-            game.addVisual(new Lanzaguisantes(position = lugar))
-        }
+object lanzaguisantes inherits Plantador(siguiente = lanzaguisantesCongelado, anterior = girasol, costo = 100){
+    override method generarPlanta(lugar){
+        game.addVisual(new Lanzaguisantes(position = lugar))
     }
 }
 
-object lanzaguisantesCongelado inherits Plantador(siguiente = nuez, anterior = lanzaguisantes){
-        method plantar(lugar){
-        if(reglas.plantable(lugar) && contadorSoles.soles()>=150){
-            contadorSoles.soles(-150)
-            game.addVisual(new LanzaguisantesCongelado(position = lugar))
-        }
+object lanzaguisantesCongelado inherits Plantador(siguiente = nuez, anterior = lanzaguisantes, costo = 150){
+    override method generarPlanta(lugar){
+        game.addVisual(new LanzaguisantesCongelado(position = lugar))
     }
 }
 
-object nuez inherits Plantador(siguiente = papapum, anterior = lanzaguisantesCongelado){
-        method plantar(lugar){
-        if(reglas.plantable(lugar) && contadorSoles.soles()>=50){
-            contadorSoles.soles(-50)
-            game.addVisual(new Nuez(position = lugar))
-        }
+object nuez inherits Plantador(siguiente = papapum, anterior = lanzaguisantesCongelado, costo = 50){
+    override method generarPlanta(lugar){
+        game.addVisual(new Nuez(position = lugar))
     }
 }
 
-object papapum inherits Plantador(siguiente = pala, anterior = nuez){
-        method plantar(lugar){
-        if(reglas.plantable(lugar) && contadorSoles.soles()>=150){
-            contadorSoles.soles(-150)
-            game.addVisual(new PapaPum(position = lugar))
-        }
+object papapum inherits Plantador(siguiente = pala, anterior = nuez, costo = 150){
+    override method generarPlanta(lugar){
+        game.addVisual(new PapaPum(position = lugar))
     }
 }
 
-object pala inherits Plantador(siguiente = girasol, anterior = papapum){
-        method plantar(lugar){
+object pala inherits Plantador(siguiente = girasol, anterior = papapum, costo = 0){
+    override method plantar(lugar){
         if(reglas.hayPlantaEn(lugar)){
             const planta = reglas.plantaEn(lugar)
             contadorSoles.soles(planta.valor())
