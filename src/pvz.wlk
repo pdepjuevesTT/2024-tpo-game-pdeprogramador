@@ -25,8 +25,8 @@ object juego {
   method eventos() {
     game.onTick(10000, "sol", {game.addVisual(new Sol())})
     game.onCollideDo(cursor, {p=>cursor.recolectar(p)})
-    game.schedule(5000, {hordas.primera()})
-    game.schedule(15000, {hordas.segunda()})
+    game.schedule(20000, {hordas.primera()})
+    game.schedule(60000, {hordas.segunda()})
   }
 
 }
@@ -44,7 +44,7 @@ object hordas{
         game.addVisual(new BucketHead())
       else
         game.addVisual(new Zombie())
-      game.schedule(1000, {self.generarZombies(cantidad-1)})
+      game.schedule(2000, {self.generarZombies(cantidad-1)})
   }
 }
 
