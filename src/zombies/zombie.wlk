@@ -38,8 +38,9 @@ class Zombie {
       self.atacar(reglas.plantaEn(position))
     else if(position.x()!=0)
       position = position.left(1)
-    else
-      self.delete() //Debería terminar el juego
+    else{
+      self.delete()
+      reglas.perder()}
 
   }
 

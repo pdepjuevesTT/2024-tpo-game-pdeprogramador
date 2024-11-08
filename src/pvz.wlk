@@ -57,5 +57,10 @@ object reglas {
 
   method hayPlantaEn (position) = game.getObjectsIn(position).any({x=>x.esPlanta()})
   method plantaEn (position) = game.getObjectsIn(position).find({x=>x.esPlanta()})
+
+  method perder (){
+    game.addVisual(object {method image() = "game_over.png" method position() = game.at(3, 2)})
+    game.stop()
+  }
     
 }
