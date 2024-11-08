@@ -1,9 +1,9 @@
 import plantas.planta.Planta
-class PapaPum inherits Planta(velocidad = 10000, costo = 150) {
+class PapaPum inherits Planta(costo = 150) {
   const property danio = 100
   var image = "papaCargando.png"
 
-  override method initialize(){game.schedule(velocidad,{self.cargarse()})}
+  override method initialize(){game.schedule(10000,{self.cargarse()})}
 
   method cargarse(){
     image = "papaCargada.png"

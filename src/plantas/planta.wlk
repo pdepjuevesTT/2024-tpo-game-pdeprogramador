@@ -2,7 +2,6 @@ import principales.*
 class Planta{
   var vida = 3
   const property position
-  const property velocidad
   const property costo
   method recolectable() = false
   method valor() = costo/2
@@ -22,6 +21,7 @@ class Planta{
 
 class PlantaConEvento inherits Planta{
   const evento = gestorId.nuevoId()
+  const property velocidad
   method hacerAlgo()
   method initialize(){
     game.onTick(velocidad, evento, {self.hacerAlgo()})
@@ -30,4 +30,5 @@ class PlantaConEvento inherits Planta{
     game.removeTickEvent(evento)
     super()
   }
+  
 }
