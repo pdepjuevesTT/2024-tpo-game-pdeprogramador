@@ -1,7 +1,7 @@
 import pvz.*
 import principales.gestorId
 class Zombie {
-  const velocidad = 2000
+  var velocidad = 2000
   var property vida = 5
   var property position = game.at(game.width()-1, (0..game.height()-2).anyOne())
   var congelado = false
